@@ -8,11 +8,11 @@ import (
 )
 
 type channelResponseFull struct {
-	Channel      Channel   `json:"channel"`
-	Channels     []Channel `json:"channels"`
-	Purpose      string    `json:"purpose"`
-	Topic        string    `json:"topic"`
-	NotInChannel bool      `json:"not_in_channel"`
+	Channel      Channel    `json:"channel"`
+	Channels     []*Channel `json:"channels"`
+	Purpose      string     `json:"purpose"`
+	Topic        string     `json:"topic"`
+	NotInChannel bool       `json:"not_in_channel"`
 	History
 	SlackResponse
 	Metadata ResponseMetadata `json:"response_metadata"`
@@ -279,7 +279,7 @@ func newChannelPagination(c *Client, options ...GetChannelsOption) (cp ChannelPa
 
 // ChannelPagination allows for paginating over the channels
 type ChannelPagination struct {
-	Channels        []Channel
+	Channels        []*Channel
 	limit           int
 	excludeArchived bool
 	excludeMembers  bool
@@ -338,13 +338,13 @@ func (api *Client) GetChannelsPaginated(options ...GetChannelsOption) ChannelPag
 
 // GetChannels retrieves all the channels
 // see https://api.slack.com/methods/channels.list
-func (api *Client) GetChannels(excludeArchived bool, options ...GetChannelsOption) ([]Channel, error) {
+func (api *Client) GetChannels(excludeArchived bool, options ...GetChannelsOption) ([]*Channel, error) {
 	return api.GetChannelsContext(context.Background(), excludeArchived, options...)
 }
 
 // GetChannelsContext retrieves all the channels with a custom context
 // see https://api.slack.com/methods/channels.list
-func (api *Client) GetChannelsContext(ctx context.Context, excludeArchived bool, options ...GetChannelsOption) (results []Channel, err error) {
+func (api *Client) GetChannelsContext(ctx context.Context, excludeArchived bool, options ...GetChannelsOption) (results []*Channel, err error) {
 	if excludeArchived {
 		options = append(options, GetChannelsOptionExcludeArchived())
 	}
