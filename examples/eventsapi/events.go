@@ -6,8 +6,8 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/slack-go/slack"
-	"github.com/slack-go/slack/slackevents"
+	"go.bonfire.io/slack"
+	"go.bonfire.io/slack/slackevents"
 )
 
 // You more than likely want your "Bot User OAuth Access Token" which starts with "xoxb-"

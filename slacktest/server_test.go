@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/slack-go/slack"
+	"go.bonfire.io/slack"
 	"github.com/stretchr/testify/assert"
 )
 

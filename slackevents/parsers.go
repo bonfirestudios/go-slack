@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"reflect"
 
-	"github.com/slack-go/slack"
+	"go.bonfire.io/slack"
 )
 
 // eventsMap checks both slack.EventsMapping and

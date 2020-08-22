@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/slack-go/slack"
+	"go.bonfire.io/slack"
 )
 
 func TestParserOuterCallBackEvent(t *testing.T) {

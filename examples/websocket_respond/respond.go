@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/slack-go/slack"
+	"go.bonfire.io/slack"
 )
 
 func main() {

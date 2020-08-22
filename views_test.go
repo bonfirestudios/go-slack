@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/slack-go/slack/internal/errorsx"
+	"go.bonfire.io/slack/internal/errorsx"
 	"github.com/stretchr/testify/assert"
 )
 

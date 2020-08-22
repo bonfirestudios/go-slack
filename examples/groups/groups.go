@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/slack-go/slack"
+	"go.bonfire.io/slack"
 )
 
 func main() {
