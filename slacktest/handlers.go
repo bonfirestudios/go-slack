@@ -62,7 +62,7 @@ func (sts *Server) conversationsInfoHandler(w http.ResponseWriter, r *http.Reque
 	ch := values.Get("channel")
 
 	response := GroupConversationResponse{
-		Ok:      true,
+		Ok: true,
 		Channel: slack.GroupConversation{
 			Conversation: slack.Conversation{
 				ID: ch,
@@ -158,7 +158,7 @@ func (sts *Server) postMessageHandler(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, msg, http.StatusInternalServerError)
 			return
 		}
-		var attaches []slack.Attachment
+		var attaches []*slack.Attachment
 		aJErr := json.Unmarshal([]byte(decoded), &attaches)
 		if aJErr != nil {
 			msg := fmt.Sprintf("Unable to decode attachments string to json: %s", aJErr.Error())

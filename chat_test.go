@@ -96,7 +96,7 @@ func TestPostMessage(t *testing.T) {
 		"Attachment": {
 			opt: []MsgOption{
 				MsgOptionAttachments(
-					Attachment{
+					&Attachment{
 						Blocks: Blocks{BlockSet: blocks},
 					}),
 			},

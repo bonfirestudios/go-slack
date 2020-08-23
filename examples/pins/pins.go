@@ -26,7 +26,7 @@ func main() {
 		postAsUserName  string
 		postAsUserID    string
 		postToChannelID string
-		channels        []slack.Channel
+		channels        []*slack.Channel
 	)
 
 	// Find the user to post as.
@@ -62,7 +62,7 @@ func main() {
 							return
 						}
 					}
-					channel = &archivedChannel
+					channel = archivedChannel
 					break
 				}
 			}

@@ -113,12 +113,12 @@ func (api *Client) GetUsersInConversationContext(ctx context.Context, params *Ge
 }
 
 // GetConversationsForUser returns the list conversations for a given user
-func (api *Client) GetConversationsForUser(params *GetConversationsForUserParameters) (channels []Channel, nextCursor string, err error) {
+func (api *Client) GetConversationsForUser(params *GetConversationsForUserParameters) (channels []*Channel, nextCursor string, err error) {
 	return api.GetConversationsForUserContext(context.Background(), params)
 }
 
 // GetConversationsForUserContext returns the list conversations for a given user with a custom context
-func (api *Client) GetConversationsForUserContext(ctx context.Context, params *GetConversationsForUserParameters) (channels []Channel, nextCursor string, err error) {
+func (api *Client) GetConversationsForUserContext(ctx context.Context, params *GetConversationsForUserParameters) (channels []*Channel, nextCursor string, err error) {
 	values := url.Values{
 		"token": {api.token},
 	}
@@ -138,7 +138,7 @@ func (api *Client) GetConversationsForUserContext(ctx context.Context, params *G
 		values.Add("exclude_archived", "true")
 	}
 	response := struct {
-		Channels         []Channel        `json:"channels"`
+		Channels         []*Channel       `json:"channels"`
 		ResponseMetaData responseMetaData `json:"response_metadata"`
 		SlackResponse
 	}{}
@@ -461,12 +461,12 @@ type GetConversationsParameters struct {
 }
 
 // GetConversations returns the list of channels in a Slack team
-func (api *Client) GetConversations(params *GetConversationsParameters) (channels []Channel, nextCursor string, err error) {
+func (api *Client) GetConversations(params *GetConversationsParameters) (channels []*Channel, nextCursor string, err error) {
 	return api.GetConversationsContext(context.Background(), params)
 }
 
 // GetConversationsContext returns the list of channels in a Slack team with a custom context
-func (api *Client) GetConversationsContext(ctx context.Context, params *GetConversationsParameters) (channels []Channel, nextCursor string, err error) {
+func (api *Client) GetConversationsContext(ctx context.Context, params *GetConversationsParameters) (channels []*Channel, nextCursor string, err error) {
 	values := url.Values{
 		"token":            {api.token},
 		"exclude_archived": {params.ExcludeArchived},
@@ -481,7 +481,7 @@ func (api *Client) GetConversationsContext(ctx context.Context, params *GetConve
 		values.Add("types", strings.Join(params.Types, ","))
 	}
 	response := struct {
-		Channels         []Channel        `json:"channels"`
+		Channels         []*Channel       `json:"channels"`
 		ResponseMetaData responseMetaData `json:"response_metadata"`
 		SlackResponse
 	}{}

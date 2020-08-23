@@ -32,7 +32,7 @@ func main() {
 		},
 	}
 
-	message := slack.MsgOptionAttachments(attachment)
+	message := slack.MsgOptionAttachments(&attachment)
 	channelID, timestamp, err := api.PostMessage("CHANNEL_ID", slack.MsgOptionText("", false), message)
 	if err != nil {
 		fmt.Printf("Could not send message: %v", err)
