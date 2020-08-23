@@ -277,7 +277,7 @@ type sendConfig struct {
 	mode            sendMode
 	endpoint        string
 	values          url.Values
-	attachments     []Attachment
+	attachments     []*Attachment
 	blocks          Blocks
 	responseType    string
 	replaceOriginal bool
@@ -320,7 +320,7 @@ func (t formSender) BuildRequest() (*http.Request, func(*chatResponseFull) respo
 type responseURLSender struct {
 	endpoint        string
 	values          url.Values
-	attachments     []Attachment
+	attachments     []*Attachment
 	blocks          Blocks
 	responseType    string
 	replaceOriginal bool
@@ -483,7 +483,7 @@ func MsgOptionText(text string, escape bool) MsgOption {
 }
 
 // MsgOptionAttachments provide attachments for the message.
-func MsgOptionAttachments(attachments ...Attachment) MsgOption {
+func MsgOptionAttachments(attachments ...*Attachment) MsgOption {
 	return func(config *sendConfig) error {
 		if attachments == nil {
 			return nil

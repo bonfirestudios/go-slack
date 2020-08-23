@@ -22,20 +22,20 @@ type Message struct {
 // Msg contains information about a slack message
 type Msg struct {
 	// Basic Message
-	ClientMsgID     string       `json:"client_msg_id,omitempty"`
-	Type            string       `json:"type,omitempty"`
-	Channel         string       `json:"channel,omitempty"`
-	User            string       `json:"user,omitempty"`
-	Text            string       `json:"text,omitempty"`
-	Timestamp       string       `json:"ts,omitempty"`
-	ThreadTimestamp string       `json:"thread_ts,omitempty"`
-	IsStarred       bool         `json:"is_starred,omitempty"`
-	PinnedTo        []string     `json:"pinned_to,omitempty"`
-	Attachments     []Attachment `json:"attachments,omitempty"`
-	Edited          *Edited      `json:"edited,omitempty"`
-	LastRead        string       `json:"last_read,omitempty"`
-	Subscribed      bool         `json:"subscribed,omitempty"`
-	UnreadCount     int          `json:"unread_count,omitempty"`
+	ClientMsgID     string        `json:"client_msg_id,omitempty"`
+	Type            string        `json:"type,omitempty"`
+	Channel         string        `json:"channel,omitempty"`
+	User            string        `json:"user,omitempty"`
+	Text            string        `json:"text,omitempty"`
+	Timestamp       string        `json:"ts,omitempty"`
+	ThreadTimestamp string        `json:"thread_ts,omitempty"`
+	IsStarred       bool          `json:"is_starred,omitempty"`
+	PinnedTo        []string      `json:"pinned_to,omitempty"`
+	Attachments     []*Attachment `json:"attachments,omitempty"`
+	Edited          *Edited       `json:"edited,omitempty"`
+	LastRead        string        `json:"last_read,omitempty"`
+	Subscribed      bool          `json:"subscribed,omitempty"`
+	UnreadCount     int           `json:"unread_count,omitempty"`
 
 	// Message Subtypes
 	SubType string `json:"subtype,omitempty"`

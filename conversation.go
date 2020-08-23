@@ -580,7 +580,7 @@ type GetConversationHistoryResponse struct {
 	ResponseMetaData struct {
 		NextCursor string `json:"next_cursor"`
 	} `json:"response_metadata"`
-	Messages []Message `json:"messages"`
+	Messages []*Message `json:"messages"`
 }
 
 // GetConversationHistory joins an existing conversation
