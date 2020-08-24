@@ -183,9 +183,9 @@ type TeamIdentity struct {
 }
 
 type userResponseFull struct {
-	Members []User `json:"members,omitempty"`
+	Members []*User `json:"members,omitempty"`
 	User    `json:"user,omitempty"`
-	Users   []User `json:"users,omitempty"`
+	Users   []*User `json:"users,omitempty"`
 	UserPresence
 	SlackResponse
 	Metadata ResponseMetadata `json:"response_metadata"`
@@ -255,12 +255,12 @@ func (api *Client) GetUserInfoContext(ctx context.Context, user string) (*User, 
 }
 
 // GetUsersInfo will retrieve the complete multi-users information
-func (api *Client) GetUsersInfo(users ...string) (*[]User, error) {
+func (api *Client) GetUsersInfo(users ...string) (*[]*User, error) {
 	return api.GetUsersInfoContext(context.Background(), users...)
 }
 
 // GetUsersInfoContext will retrieve the complete multi-users information with a custom context
-func (api *Client) GetUsersInfoContext(ctx context.Context, users ...string) (*[]User, error) {
+func (api *Client) GetUsersInfoContext(ctx context.Context, users ...string) (*[]*User, error) {
 	values := url.Values{
 		"token":          {api.token},
 		"users":          {strings.Join(users, ",")},
@@ -306,7 +306,7 @@ func newUserPagination(c *Client, options ...GetUsersOption) (up UserPagination)
 
 // UserPagination allows for paginating over the users
 type UserPagination struct {
-	Users        []User
+	Users        []*User
 	limit        int
 	presence     bool
 	previousResp *ResponseMetadata
@@ -363,12 +363,12 @@ func (api *Client) GetUsersPaginated(options ...GetUsersOption) UserPagination {
 }
 
 // GetUsers returns the list of users (with their detailed information)
-func (api *Client) GetUsers() ([]User, error) {
+func (api *Client) GetUsers() ([]*User, error) {
 	return api.GetUsersContext(context.Background())
 }
 
 // GetUsersContext returns the list of users (with their detailed information) with a custom context
-func (api *Client) GetUsersContext(ctx context.Context) (results []User, err error) {
+func (api *Client) GetUsersContext(ctx context.Context) (results []*User, err error) {
 	p := api.GetUsersPaginated()
 	for err == nil {
 		p, err = p.Next(ctx)

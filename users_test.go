@@ -50,8 +50,8 @@ func getTestUserProfile() UserProfile {
 	}
 }
 
-func getTestUserWithId(id string) User {
-	return User{
+func getTestUserWithId(id string) *User {
+	return &User{
 		ID:                id,
 		Name:              "Test User",
 		Deleted:           false,
@@ -72,12 +72,12 @@ func getTestUserWithId(id string) User {
 	}
 }
 
-func getTestUser() User {
+func getTestUser() *User {
 	return getTestUserWithId("UXXXXXXXX")
 }
 
-func getTestUsers() []User {
-	return []User{
+func getTestUsers() []*User {
+	return []*User{
 		getTestUserWithId("UYYYYYYYY"),
 		getTestUserWithId("UZZZZZZZZ"),
 	}
@@ -118,8 +118,8 @@ func getUserIdentity(rw http.ResponseWriter, r *http.Request) {
 func getUserInfo(rw http.ResponseWriter, r *http.Request) {
 	rw.Header().Set("Content-Type", "application/json")
 	response, _ := json.Marshal(struct {
-		Ok   bool `json:"ok"`
-		User User `json:"user"`
+		Ok   bool  `json:"ok"`
+		User *User `json:"user"`
 	}{
 		Ok:   true,
 		User: getTestUser(),
@@ -130,8 +130,8 @@ func getUserInfo(rw http.ResponseWriter, r *http.Request) {
 func getUsersInfo(rw http.ResponseWriter, r *http.Request) {
 	rw.Header().Set("Content-Type", "application/json")
 	response, _ := json.Marshal(struct {
-		Ok    bool   `json:"ok"`
-		Users []User `json:"users"`
+		Ok    bool    `json:"ok"`
+		Users []*User `json:"users"`
 	}{
 		Ok:    true,
 		Users: getTestUsers(),
@@ -142,8 +142,8 @@ func getUsersInfo(rw http.ResponseWriter, r *http.Request) {
 func getUserByEmail(rw http.ResponseWriter, r *http.Request) {
 	rw.Header().Set("Content-Type", "application/json")
 	response, _ := json.Marshal(struct {
-		Ok   bool `json:"ok"`
-		User User `json:"user"`
+		Ok   bool  `json:"ok"`
+		User *User `json:"user"`
 	}{
 		Ok:   true,
 		User: getTestUser(),
@@ -390,7 +390,7 @@ func TestGetUsers(t *testing.T) {
 		return
 	}
 
-	if !reflect.DeepEqual([]User{
+	if !reflect.DeepEqual([]*User{
 		getTestUserWithId("U000"),
 		getTestUserWithId("U001"),
 		getTestUserWithId("U002"),
@@ -408,7 +408,7 @@ func getUserPage(max int64) func(rw http.ResponseWriter, r *http.Request) {
 		sresp := SlackResponse{
 			Ok: true,
 		}
-		members := []User{
+		members := []*User{
 			getTestUserWithId(fmt.Sprintf("U%03d", n)),
 		}
 		rw.Header().Set("Content-Type", "application/json")
@@ -446,7 +446,7 @@ func getUserPagesWithRateLimitErrors(max int64) func(rw http.ResponseWriter, r *
 		sresp := SlackResponse{
 			Ok: true,
 		}
-		members := []User{
+		members := []*User{
 			getTestUserWithId(fmt.Sprintf("U%03d", n)),
 		}
 		rw.Header().Set("Content-Type", "application/json")
@@ -685,7 +685,7 @@ func TestGetUsersHandlesRateLimit(t *testing.T) {
 		return
 	}
 
-	if !reflect.DeepEqual([]User{
+	if !reflect.DeepEqual([]*User{
 		getTestUserWithId("U000"),
 		getTestUserWithId("U001"),
 		getTestUserWithId("U002"),
